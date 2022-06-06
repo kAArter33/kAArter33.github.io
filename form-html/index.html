@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <form action="https://formspree.io/f/xgedqwqj" method="POST">
+        <label for="username">Imie </label>
+        <input type="text" name="username" id="username" /><br>
+        <label for="surname">Nazwisko</label>
+        <input type="text" name="surname" id="surname" /> <br>
+        <label for="email">E-mail</label>
+        <input type="email" name="mail" id="email" placeholder="Podaj adres e-mail"/> <br>
+        <label for="quanity">Telefon</label>
+        <input type="number" name="quanity" id="quanity" /> <br>
+
+        <label>Miasto </label><select>
+            <option value="opcja1">Kraków</option>
+            <option value="opcja2">Warszawa</option>
+            <option value="opcja3">Gdańsk</option>
+        </select><br>
+
+        <label>Płeć<input type="radio" name="gender" />Mężczyzna
+            <input type="radio" name="gender" />Kobieta</label><br>
+
+        <label>Zgoda na przetwarzanie danych osobowych</label>
+         <input type="checkbox" name="dane"><br>
+
+        Wiadomość <textarea name="message" maxlength="1000"></textarea><br>
+        <input type="submit" value="Wyślij formularz">
+    </form>
+
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
