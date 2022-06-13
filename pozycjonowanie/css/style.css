@@ -33,7 +33,7 @@
     background: green;
 }
 
-@media all and (min-width:992px) {
+@media all and (min-width:768px) and (max-width:992px) {
     .aside-1 {
         flex: 2 0;
 
@@ -49,7 +49,7 @@
 
 }
 
-@media all and (min-width:768px) and (max-width:992px) {
+@media all  and (min-width:992px) {
     .main {
         flex: 3 0px;
     }
