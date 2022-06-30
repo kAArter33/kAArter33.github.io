@@ -1,0 +1,30 @@
+h2 {
+    text-align: center;
+    color: grey;
+}
+
+hr {
+    width: 20vh;
+}
+
+i {
+    color: orange;
+    font-size: 3em;
+    position: relative;
+}
+
+.bg {
+    background-color: rgba(155, 148, 148, 0.068);
+    height: 70px;
+    width: 70px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+.container {
+    display: inline-block;
+}
+
