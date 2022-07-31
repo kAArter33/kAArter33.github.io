@@ -16,9 +16,7 @@ function Home() {
       .then((res) => {
         setPosts(posts.concat(res.data));
       })
-
   }
-
 
   const getPosts = () => {
     axios.post("https://akademia108.pl/api/social-app/post/latest")

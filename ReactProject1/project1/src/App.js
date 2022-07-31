@@ -8,28 +8,6 @@ import React, { useState } from "react";
 
 function App() {
 
-  const [userName, setUserName] = useState('')
-  const [pwd, setUserPwd] = useState('')
-
-  let postData = {
-    username: "adam",
-    password: "1234"
-  };
-
-  axios.defaults.headers.common["Authorization"] = "Bearer " + (postData ? postData.jwt_token : "");
-  axios
-    .post("https://akademia108.pl/api/social-app/user/login", postData)
-    .then((res) => {
-      console.log("RESPONSE RECEIVED: ", res);
-    })
-    .catch((err) => {
-      console.log("AXIOS ERROR: ", err);
-    });
-
-  localStorage.setItem("Name", userName)
-  localStorage.setItem("Password", pwd)
-
-
   return (
     <div className="App">
       <div className="Main-nav">
