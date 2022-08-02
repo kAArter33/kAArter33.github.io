@@ -6,7 +6,24 @@ import SignUp from "./SignUp";
 import Home from "./Home";
 import React, { useState } from "react";
 
+
 function App() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+
+  axios.defaults.headers.common["Authorization"] = "Bearer " + (user ? user.jwt_token : "");
+
+  const logOut = (e) => {
+
+    e.preventDefault()
+    axios
+      .post("https://akademia108.pl/api/social-app/user/logout", user)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log('error',err.data)
+      });
+  }
 
   return (
     <div className="App">
@@ -15,17 +32,21 @@ function App() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/Login">Login</Link>
-          </li>
-          <li>
+          {!user &&
+            <li>
+              <Link to="/Login">Login</Link>
+            </li>}
+          {!user && <li>
             <Link to="/SignUp">SignUp</Link>
-          </li>
+          </li>}
+          {user && <li onClick={logOut}>
+            <Link to='/'>Logout</Link>
+          </li>}
         </nav>
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/Login" element={<Login setUser={setUser} user={user} />} />
         <Route path="/SignUp" element={<SignUp />} />
       </Routes>
     </div>

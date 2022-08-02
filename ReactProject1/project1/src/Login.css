@@ -20,7 +20,7 @@
     margin-bottom: 5px;
 }
 
-.login form button {
+.login form #submitBTN {
     margin: 5px;
     background-color: aqua;
     border: none;
@@ -28,8 +28,9 @@
     border-radius: 10px;
     cursor: pointer;
     color: white;
+    width:60px
 }
 
-.login form button:hover {
+.login form #submitBTN:hover {
     background-color: grey;
 }

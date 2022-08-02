@@ -3,9 +3,7 @@ import "./Login.css";
 import axios from 'axios';
 import { Navigate } from "react-router-dom";
 
-export default function Login() {
-
-  const [user, setUser] = useState(null)
+export default function Login(props) {
 
   const [formData, prevFormData] = useState({
     username: "",
@@ -24,16 +22,8 @@ export default function Login() {
     })
   }
 
-  const handleSubmit = e => {
+  const checkUser = (e) => {
     e.preventDefault()
-
-    setUser({
-      username: 'adam',
-      token: "xyz"
-    })
-  }
-
-  const checkUser = () => {
 
     let loginData = {
       username: formData.username,
@@ -43,22 +33,23 @@ export default function Login() {
     axios
       .post("https://akademia108.pl/api/social-app/user/login", loginData)
       .then((res) => {
-        console.log("response",res.data);
+        props.setUser(res.data)
+        localStorage.setItem('user', JSON.stringify(res.data))
+        console.log("response", res.data);
       })
       .catch((err) => {
         console.log('error', err.data);
 
       });
-
   }
-
 
   return (
     <div className="login">
-      <form className="login-form">
+      {props.user && <Navigate to='/' />}
+      <form className="login-form" onSubmit={checkUser} >
         <input type="text" name="username" placeholder="Login" onChange={inputValueChange} />
         <input type="password" name="password" placeholder="Password" onChange={inputValueChange} />
-        <button onClick={checkUser}>Login</button>
+        <input type="submit" value="Login" id="submitBTN"></input>
       </form>
     </div>
   );
