@@ -30,7 +30,13 @@ function Home(props) {
     getPosts()
   }, [])
 
-  console.log(posts);
+  // console.log(posts);
+
+  // const getNewerPost = () => {
+
+  //   axios
+  //     .post("https://akademia108.pl/api/social-app/post/newer-then")
+  // };
 
   return (
     <div className="main-div">
