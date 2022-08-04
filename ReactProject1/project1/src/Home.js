@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Home.css";
+import AddPost from "./AddPost";
 
-function Home() {
+function Home(props) {
 
   const [posts, setPosts] = useState([]);
 
@@ -22,7 +23,6 @@ function Home() {
     axios.post("https://akademia108.pl/api/social-app/post/latest")
       .then((res) => {
         setPosts(res.data);
-
       });
   };
 
@@ -34,10 +34,15 @@ function Home() {
 
   return (
     <div className="main-div">
+      {props.user &&
+        <div className="post-creator">
+          <AddPost />
+        </div>
+      }
       {posts.map((post) => {
 
         return (
-          <div className="posts-holder">
+          <div className="posts-holder" key={post.id}>
             <div className="posts">
               <div className="avatar">
                 <img src={post.user.avatar_url} alt={post.user} />

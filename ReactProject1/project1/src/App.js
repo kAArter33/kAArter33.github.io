@@ -16,12 +16,14 @@ function App() {
 
     e.preventDefault()
     axios
-      .post("https://akademia108.pl/api/social-app/user/logout", user)
+      .post("https://akademia108.pl/api/social-app/user/logout")
       .then((res) => {
         console.log(res.data);
+        setUser(null)
+        localStorage.setItem('user', null)
       })
       .catch((err) => {
-        console.log('error',err.data)
+        console.log('error', err.data)
       });
   }
 
@@ -45,13 +47,11 @@ function App() {
         </nav>
       </div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home setUser={setUser} user={user} />} />
         <Route path="/Login" element={<Login setUser={setUser} user={user} />} />
         <Route path="/SignUp" element={<SignUp />} />
       </Routes>
     </div>
-
-
   );
 }
 
