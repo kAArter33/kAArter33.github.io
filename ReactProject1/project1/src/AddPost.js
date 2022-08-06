@@ -3,27 +3,13 @@ import axios from "axios";
 import "./AddPost.css";
 
 
-function AddPost() {
+function AddPost(props) {
 
-    const [postData, prevPostData] = useState({
-
-    })
-
-    const textValueChange = e => {
-        const target = e.target
-        const name = target.name
-
-        prevPostData(prevData => {
-            return {
-                ...prevData, [name]: target.value
-            }
-        })
-    }
-
+    const [postData, setPostData] = useState("")
     const addNewPost = (e) => {
 
         let newUserPost = {
-            "content": postData.postcontent
+            "content": postData
         }
 
         e.preventDefault()
@@ -31,6 +17,7 @@ function AddPost() {
             .post("https://akademia108.pl/api/social-app/post/add", newUserPost)
             .then((res) => {
                 console.log(res.data)
+                props.newPost()
             })
             .catch((err) => {
                 console.log(err)
@@ -42,7 +29,7 @@ function AddPost() {
     return (
         <div className="post-creator">
             <form className="add-post-content">
-                <textarea onChange={textValueChange} name="postcontent" placeholder="Add post..."></textarea>
+                <textarea onChange={(e) => setPostData(e.target.value)} name="postcontent" placeholder="Add post..."></textarea>
                 <button onClick={addNewPost} className="add-post-btn">Add</button>
             </form>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Home.css";
 import AddPost from "./AddPost";
+import Followers from "./Followers";
 
 function Home(props) {
 
@@ -30,22 +31,47 @@ function Home(props) {
     getPosts()
   }, [])
 
-  // console.log(posts);
+  console.log(posts);
 
-  // const getNewerPost = () => {
+  const getNewerPost = () => {
 
-  //   axios
-  //     .post("https://akademia108.pl/api/social-app/post/newer-then")
-  // };
+    let lastUpdate = {
+      date: posts[0].created_at
+    }
+
+    axios
+      .post("https://akademia108.pl/api/social-app/post/newer-then", lastUpdate)
+      .then((res) => {
+        setPosts(res.data.concat(posts));
+      })
+  };
+
+
 
   return (
     <div className="main-div">
       {props.user &&
         <div className="post-creator">
-          <AddPost />
+          <AddPost newPost={getNewerPost} />
+        </div>
+      }
+      {props.user &&
+        <div className="followers">
+          <Followers />
         </div>
       }
       {posts.map((post) => {
+
+        const DeletePost = () => {
+          let currentPostId = {
+            "post_id": post.id
+          }
+          axios
+            .post("https://akademia108.pl/api/social-app/post/delete", currentPostId)
+            .then((res) => {
+              //  ????
+            })
+        }
 
         return (
           <div className="posts-holder" key={post.id}>
@@ -66,6 +92,9 @@ function Home(props) {
                   {post.content}
                 </div>
                 <div className="likes">
+                  {props.user.username === post.user.username &&
+                    <button onClick={DeletePost} className="btnDel">Usuń</button>
+                  }
                   {post.likes.length}
                 </div>
               </div>
