@@ -6,6 +6,7 @@ import "./AddPost.css";
 function AddPost(props) {
 
     const [postData, setPostData] = useState("")
+
     const addNewPost = (e) => {
 
         let newUserPost = {
@@ -22,10 +23,8 @@ function AddPost(props) {
             .catch((err) => {
                 console.log(err)
             })
-
     }
-
-
+    
     return (
         <div className="post-creator">
             <form className="add-post-content">

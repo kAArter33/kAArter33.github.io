@@ -6,6 +6,12 @@
     margin: 5px;
 }
 
+.followers {
+    max-width: 500px;
+    border: 1px solid black;
+    margin: auto;
+}
+
 .posts {
     display: flex;
     border: 1px solid black;
@@ -33,8 +39,8 @@
 
 .likes {
     display: block;
-    padding: 5px;
     text-align: right;
+    padding: 5px;
 }
 
 .btnDel {

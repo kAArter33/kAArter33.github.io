@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Home.css";
 import AddPost from "./AddPost";
 import Followers from "./Followers";
+import Post from "./Post";
 
 function Home(props) {
 
@@ -46,7 +47,18 @@ function Home(props) {
       })
   };
 
-
+  const deletePost = (id) => {
+    let currentPostId = {
+      "post_id": id
+    }
+    axios
+      .post("https://akademia108.pl/api/social-app/post/delete", currentPostId)
+      .then((res) => {
+        setPosts(prevPosts => {
+          return prevPosts.filter(post => post.id !== id)
+        })
+      })
+  }
 
   return (
     <div className="main-div">
@@ -57,50 +69,14 @@ function Home(props) {
       }
       {props.user &&
         <div className="followers">
-          <Followers />
+          <Followers followersPosts={getPosts} />
         </div>
       }
+
       {posts.map((post) => {
 
-        const DeletePost = () => {
-          let currentPostId = {
-            "post_id": post.id
-          }
-          axios
-            .post("https://akademia108.pl/api/social-app/post/delete", currentPostId)
-            .then((res) => {
-              //  ????
-            })
-        }
-
         return (
-          <div className="posts-holder" key={post.id}>
-            <div className="posts">
-              <div className="avatar">
-                <img src={post.user.avatar_url} alt={post.user} />
-              </div>
-              <div className="post-data">
-                <div className="post-info">
-                  <div className="user-name">
-                    <strong>{post.user.username}</strong>
-                  </div>
-                  <div className="post-create-date">
-                    <span> {post.created_at.substring(0, 10)}</span>
-                  </div>
-                </div>
-                <div className="post-content">
-                  {post.content}
-                </div>
-                <div className="likes">
-                  {props.user.username === post.user.username &&
-                    <button onClick={DeletePost} className="btnDel">Usuń</button>
-                  }
-                  {post.likes.length}
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <Post post={post} user={props.user} key={post.id} deletingPost={deletePost} />
         )
       })}
       <button onClick={getNextPosts} className="load-morebtn">Load More</button>
